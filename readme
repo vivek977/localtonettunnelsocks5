@@ -1,0 +1,20 @@
+# Secure Discord Bot - Account Manager v3.0
+
+This Discord bot provides a secure way to manage shared proxy accounts through LocalToNet. Users can create and view accounts securely using Discord commands.
+
+## Features
+- Secure account creation with region selection
+- Password-protected account viewing
+- Automatic menu updates in the Discord channel
+- API integration with LocalToNet
+- Data persistence using `accounts.json`
+
+## Requirements
+- Python 3.8+
+- Discord Bot Token
+- LocalToNet API Key
+- `docker` & `docker-compose` (for containerized deployment)
+
+## Installation
+
+### 1. Clone the Repository
