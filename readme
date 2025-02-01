@@ -14,6 +14,7 @@ This Discord bot provides a secure way to manage shared proxy accounts through L
 - Discord Bot Token
 - LocalToNet API Key
 - `docker` & `docker-compose` (for containerized deployment)
+- Open tunnel with endpoints set in LocalToNet
 
 ## Installation
 
@@ -70,6 +71,10 @@ docker-compose up -d
 - Use `2` to view accounts (password required)
 - Use `3` to refresh the menu
 - Use `0` to cancel an operation
+
+## Important Notes
+- IP and port are hardcoded in the script; modify them according to your setup.
+- You must have a tunnel open and endpoints configured in LocalToNet.
 
 ## License
 This project is licensed under the MIT License.
