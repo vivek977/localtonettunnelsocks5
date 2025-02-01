@@ -18,3 +18,59 @@ This Discord bot provides a secure way to manage shared proxy accounts through L
 ## Installation
 
 ### 1. Clone the Repository
+```bash
+git clone https://github.com/yourusername/secure-discord-bot.git
+cd secure-discord-bot
+```
+
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Create `.env` File
+Create a `.env` file in the root directory and add:
+```
+DISCORD_BOT_TOKEN=your_discord_bot_token
+DISCORD_CHANNEL_ID=your_channel_id
+LOCALTONET_API_KEY=your_localtonet_api_key
+VIEW_PASSWORD=980345  # Change for security
+```
+
+### 4. Run the Bot
+```bash
+python bot.py
+```
+
+## Docker Deployment
+### 1. Build & Run Container
+```bash
+docker build -t secure-discord-bot .
+docker run -d --name discord-bot --env-file .env secure-discord-bot
+```
+
+### 2. Docker Compose (Recommended)
+Create a `docker-compose.yml` file:
+```yaml
+version: '3'
+services:
+  bot:
+    build: .
+    env_file:
+      - .env
+    restart: always
+```
+Run the container:
+```bash
+docker-compose up -d
+```
+
+## Usage
+- Use `1` to create an account
+- Use `2` to view accounts (password required)
+- Use `3` to refresh the menu
+- Use `0` to cancel an operation
+
+## License
+This project is licensed under the MIT License.
+
