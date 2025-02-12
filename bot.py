@@ -413,7 +413,7 @@ class AccountManager(commands.Cog):
 # Constants
 # --------------------------
 TUNNELS = {
-    1: {"name": "US Southeast", "id": 1019575, "port": 3080},
+    1: {"name": "US Southeast", "id": 1044883, "port": 3080},
     2: {"name": "US Northeast", "id": 1001992, "port": 1080},
     3: {"name": "US West", "id": 1019535, "port": 2080}
 }
