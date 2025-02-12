@@ -24,7 +24,7 @@ HOST_IP = "130.51.20.126"
 
 DATA_DIR = "data"
 DATA_FILE = os.path.join(DATA_DIR, "accounts.json")
-MAX_ACCOUNTS = 500
+MAX_ACCOUNTS = 500  # Increased account creation capacity to 500
 
 Path(DATA_DIR).mkdir(parents=True, exist_ok=True)
 
@@ -167,12 +167,14 @@ class AccountManager(commands.Cog):
                 await self.help_message.edit(embed=embed)
             else:
                 self.help_message = await self.system_channel.send(embed=embed)
+                await self.help_message.pin()  # Pin the main menu message
             
             for emoji in self.reaction_map.keys():
                 await self.help_message.add_reaction(emoji)
                 
         except discord.NotFound:
             self.help_message = await self.system_channel.send(embed=embed)
+            await self.help_message.pin()  # Pin the main menu message
             for emoji in self.reaction_map.keys():
                 await self.help_message.add_reaction(emoji)
 
@@ -219,7 +221,7 @@ class AccountManager(commands.Cog):
                 embed=discord.Embed(
                     title="🌍 Choose Region",
                     description=(
-                        "1️⃣ US Southeast (Port 6097)\n"
+                        "1️⃣ US Southeast (Port 3080)\n"
                         "2️⃣ US Northeast (Port 1080)\n"
                         "3️⃣ US West (Port 2080)\n"
                         "❌ Cancel"
@@ -343,18 +345,41 @@ class AccountManager(commands.Cog):
             await self.show_main_menu()
 
     def generate_credentials(self):
-        adjectives = ["silent", "quick", "hidden", "calm", "bright"]
-        nouns = ["shadow", "forest", "river", "stone", "valley"]
-        
-        for _ in range(100):
-            username = random.choice(adjectives) + random.choice(nouns)
+        # Expanded list of adjectives
+        adjectives = [
+            "silent", "quick", "hidden", "calm", "bright", "dark", "fierce", "gentle", 
+            "hasty", "icy", "jolly", "keen", "lucky", "mighty", "noble", "odd", "proud", 
+            "quiet", "rapid", "sharp", "tough", "unique", "vivid", "witty", "young", 
+            "zesty", "ancient", "bold", "clever", "daring", "eager", "fancy", "glorious", 
+            "honest", "ideal", "jovial", "kind", "lively", "magic", "nice", "optimal", 
+            "prime", "rare", "super", "true", "ultra", "vital", "wise", "expert", "nova"
+        ]
+
+        # Expanded list of nouns
+        nouns = [
+            "shadow", "forest", "river", "stone", "valley", "mountain", "ocean", "sky", 
+            "star", "sun", "moon", "cloud", "wind", "fire", "water", "earth", "flower", 
+            "tree", "leaf", "bird", "wolf", "lion", "tiger", "eagle", "dragon", "phoenix", 
+            "sword", "shield", "arrow", "hammer", "light", "darkness", "spirit", "frost", 
+            "flame", "thunder", "storm", "rain", "snow", "mist", "dawn", "dusk", "night", 
+            "day", "horizon", "galaxy", "comet", "planet", "orbit", "nebula", "void"
+        ]
+
+        # Generate a unique username
+        for _ in range(100):  # Try up to 100 times to find a unique username
+            adjective = random.choice(adjectives)
+            noun = random.choice(nouns)
+            username = adjective + noun  # Combine adjective and noun
+
+            # Ensure the username is unique
             if username not in self.used_usernames:
                 self.used_usernames.add(username)
                 return (
                     username,
-                    datetime.now().strftime("%d%m%Y")
+                    datetime.now().strftime("%d%m%Y")  # Password based on current date
                 )
-        
+
+        # Fallback if no unique username is found after 100 attempts
         return (
             "user" + "".join(random.sample("abcdefghjkmnpqrstuvwxyz", 3)),
             datetime.now().strftime("%d%m%Y")
@@ -388,7 +413,7 @@ class AccountManager(commands.Cog):
 # Constants
 # --------------------------
 TUNNELS = {
-    1: {"name": "US Southeast", "id": 1019575, "port": 6097},
+    1: {"name": "US Southeast", "id": 1019575, "port": 3080},
     2: {"name": "US Northeast", "id": 1001992, "port": 1080},
     3: {"name": "US West", "id": 1019535, "port": 2080}
 }
